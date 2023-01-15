@@ -7,9 +7,6 @@ import ru.vood.builder.graph.abstraction.IExternalNode
 import ru.vood.builder.graph.abstraction.assembly
 import ru.vood.builder.graph.traceGraph.dto.ExternalFlinkService
 import ru.vood.builder.graph.traceGraph.dto.ExternalTopic
-import ru.vood.builder.graph.traceGraph.dto.FlinkService
-import ru.vood.builder.graph.traceGraph.dto.Topic
-import java.lang.IllegalStateException
 import kotlin.test.assertEquals
 
 class CyclePathTest {
@@ -23,7 +20,7 @@ class CyclePathTest {
     )
 
     @Test
-    fun creatingWithCycleCheckTest(){
+    fun creatingWithCycleCheckTest() {
 
         val cyclicGraph = acyclicGraph.plus(Arrow(ExternalFlinkService("s1"), ExternalTopic("t2")))
 
