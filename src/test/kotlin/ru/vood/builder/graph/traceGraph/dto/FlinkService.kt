@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 
 data class FlinkService(
     val name: String,
-    val nextNodes: Set<INode>,
+    override val nextNodes: Set<INode>,
 ) : AbstractNode() {
     override fun nextNodes(): Set<INode> {
         return nextNodes
