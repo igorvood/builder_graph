@@ -13,7 +13,8 @@ class TopicNodeTest {
         val topic1 = Topic("asd", setOf())
         val assertThrows = assertThrows<IllegalArgumentException> { Topic("asd", setOf(topic1)) }
 
-        assert(assertThrows.message!!.contains("end nodes do not fit the restrictions"))
+        println(assertThrows.message)
+        assertEquals("end nodes do not fit the restrictions [Topic(name=asd, nextNodes=[])]", assertThrows.message)
 
     }
 }

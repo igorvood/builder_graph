@@ -4,7 +4,7 @@ import ru.vood.builder.graph.abstraction.AbstractNode
 import ru.vood.builder.graph.abstraction.INode
 import kotlin.reflect.KClass
 
-class FlinkService(
+data class FlinkService(
     val name: String,
     val nextNodes: Set<INode>,
 ) : AbstractNode() {
