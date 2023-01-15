@@ -1,12 +1,12 @@
 package ru.vood.builder.graph.abstraction
 
-fun <E : Arrow<out IExternalNode, out IExternalNode>> Set<E>.assembly(): Map<IExternalNode, Set<IExternalNode>> {
+inline fun <reified E : Arrow<out IExternalNode, out IExternalNode>> Set<E>.assembly(): Map<IExternalNode, Set<IExternalNode>> {
 
     return addArrows(mapOf(), this)
 
 }
 
-fun <E : Arrow<out IExternalNode, out IExternalNode>> addArrows(
+tailrec  fun < E : Arrow<out IExternalNode, out IExternalNode>> addArrows(
     endedArrow: Map<IExternalNode, Set<IExternalNode>>,
     remainingElements: Set<E>
 ): Map<IExternalNode, Set<IExternalNode>> {
@@ -39,8 +39,6 @@ fun <E : Arrow<out IExternalNode, out IExternalNode>> addArrows(
 
     val nextArrowsVal = nextArrows.plus(endedArrow)
     return addArrows(nextArrowsVal, remainingElementsNew)
-
-
 }
 
 private fun <K : IExternalNode, V : Set<IExternalNode>> Map<K, V>.allNodes(): Set<IExternalNode> {
