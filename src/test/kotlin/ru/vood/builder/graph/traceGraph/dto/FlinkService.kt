@@ -15,5 +15,6 @@ data class FlinkService(
         val badNodesNodes = getBadNodesNodes()
         require(badNodesNodes.isNotEmpty()) { "end nodes do not fit the restrictions $badNodesNodes" }
     }
+
 }
 

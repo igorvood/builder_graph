@@ -1,5 +1,6 @@
 package ru.vood.builder.graph.abstraction
 
+import arrow.typeclasses.Semigroup
 import kotlin.reflect.KClass
 
 abstract class AbstractNode(
@@ -9,6 +10,7 @@ abstract class AbstractNode(
 //    abstract fun checkLimitationClassNextNodes(): Set<KClass<out INode>>
 
     protected fun getBadNodesNodes(): Set<INode> {
+        Semigroup
         val toSet = nextNodes()
             .filter { nextN -> !checkLimitationClassNextNodes.contains(nextN::class) }
             .toSet()
