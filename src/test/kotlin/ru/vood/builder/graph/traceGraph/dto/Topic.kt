@@ -7,14 +7,12 @@ import kotlin.reflect.KClass
 data class Topic(
     val name: String,
     override  val nextNodes: Set<INode>,
-) : AbstractNode() {
+) : AbstractNode(setOf(FlinkService::class)) {
     override fun nextNodes(): Set<INode> {
         return nextNodes
     }
 
-    override fun checkLimitationClassNextNodes(): Set<KClass<out INode>> {
-        return setOf(FlinkService::class)
-    }
+
 
     init {
         val badNodesNodes = getBadNodesNodes()
