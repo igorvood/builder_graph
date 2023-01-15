@@ -1,31 +1,8 @@
 package ru.vood.builder.graph.abstraction
 
-fun <E : Arrow<out IExternalNode, out IExternalNode>> Set<E>.assembly(): IExternalNode {
+fun <E : Arrow<out IExternalNode, out IExternalNode>> Set<E>.assembly(): Map<IExternalNode, Set<IExternalNode>> {
 
-    val addArrows1 = addArrows(mapOf(), this)
-
-
-    val endOnly = this
-        .filter { to -> this.none { from -> from.from == to.to } }
-
-
-    val endedArrow = endOnly
-        .groupBy { it.from }
-        .map { it.key to it.value.map { s -> s.to }.toSet() }
-        .toMap()
-
-    val remainingElements = this.minus(endOnly.toSet())
-
-    val addArrows = addArrows(endedArrow, remainingElements)
-
-    val first = this.first()
-    val firstFromOnly = this
-        .filter { it == first }
-    val toList = firstFromOnly
-        .map { it.to }
-
-    TODO()
-
+    return addArrows(mapOf(), this)
 
 }
 
@@ -39,8 +16,10 @@ fun <E : Arrow<out IExternalNode, out IExternalNode>> addArrows(
     val fromNodes = endedArrow.values.flatten().toSet()
     val begOnly = if (fromNodes.isNotEmpty())
         remainingElements.filter { fromNodes.contains(it.from) }
-    else remainingElements
-        .filter { from -> remainingElements.none { to -> from.from == to.to } }
+    else {
+        remainingElements
+            .filter { from -> remainingElements.none { to -> from.from == to.to } }
+    }
 
     val nextArrows = begOnly
         .groupBy { it.from }
